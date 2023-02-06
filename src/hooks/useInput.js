@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export default function useInput() {
   const [value, setValue] = useState('')
+  const [error, setError] = useState(false)
 
   const onChange = e => {
     setValue(e.target.value)
@@ -11,5 +12,5 @@ export default function useInput() {
     setValue('')
   }
 
-  return { value, onChange, reset }
+  return { value, error, setError, onChange, reset }
 }

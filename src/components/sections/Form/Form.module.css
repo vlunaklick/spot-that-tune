@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-.form div {
+.inputContainer {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -57,4 +57,17 @@
   color: #fff;
   font-size: 0.875rem;
   margin-top: 0.5rem;
+}
+
+.link {
+  color: #a855f7;
+  font-size: 0.875rem;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }

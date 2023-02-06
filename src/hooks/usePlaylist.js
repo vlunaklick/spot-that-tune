@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
 
-import { getPlaylist } from '@/utils'
-
-export default function usePlaylist() {
+export default function usePlaylist({ initialPlaylistItems }) {
   const [playlistItems, setPlaylistItems] = useState([])
-  const [playlistError, setPlaylistError] = useState(false)
 
   const [video, setVideo] = useState('')
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState('')
+
+  useEffect(() => {
+    if (initialPlaylistItems.length > 0) {
+      setPlaylistItems(initialPlaylistItems)
+    }
+  }, [initialPlaylistItems])
 
   useEffect(() => {
     if (playlistItems.length > 0) {
@@ -33,26 +36,6 @@ export default function usePlaylist() {
     }
   }, [playlistItems])
 
-  const handleSearchPlaylist = async value => {
-    const playlistId = value.split('list=')[1]
-
-    if (!playlistId) {
-      setPlaylistError(true)
-      return
-    }
-
-    setPlaylistError(false)
-
-    const data = await getPlaylist(playlistId)
-
-    if (data.error) {
-      setPlaylistError(true)
-      return
-    }
-
-    setPlaylistItems(data.items)
-  }
-
   const nextVideo = () => {
     setSelectedOption('')
     if (playlistItems.length === 1) {
@@ -72,23 +55,12 @@ export default function usePlaylist() {
     setSelectedOption(videoId)
   }
 
-  const restartGame = () => {
-    setPlaylistItems([])
-    setPlaylistError(false)
-    setOptions([])
-    setVideo('')
-    setSelectedOption('')
-  }
-
   return {
     playlistItems,
-    playlistError,
     video,
     options,
     selectedOption,
-    handleSearchPlaylist,
     selectOption,
     nextVideo,
-    restartGame,
   }
 }

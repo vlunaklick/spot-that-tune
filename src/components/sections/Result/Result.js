@@ -1,5 +1,7 @@
 import styles from './Result.module.css'
 
+import useNavigation from '@/hooks/useNavigation'
+
 import Button from '../../app/Button/Button'
 
 export default function Result({
@@ -7,8 +9,8 @@ export default function Result({
   playlistsItems,
   nextVideo,
   video,
-  restartGame,
 }) {
+  const { navigateToHome } = useNavigation()
   if (selectedOption === '' || playlistsItems < 1) return null
 
   const status = selectedOption === video.snippet.resourceId.videoId
@@ -23,7 +25,7 @@ export default function Result({
           The correct answer was:{' '}
           <span className={styles.correctAnswer}>{video.snippet.title}</span>
         </p>
-        <Button onClick={restartGame}>Select Playlist</Button>
+        <Button onClick={navigateToHome}>Select Playlist</Button>
       </section>
     )
 

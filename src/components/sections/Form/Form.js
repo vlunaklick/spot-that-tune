@@ -1,29 +1,34 @@
-import useInput from '@/hooks/useInput'
-
 import styles from './Form.module.css'
 
-export default function Form({ handleSearchPlaylist, playlistError, video }) {
-  const { value, onChange, reset } = useInput()
+import useInput from '@/hooks/useInput'
 
-  if (video) return null
+import { validPlaylist } from '@/utils'
+import useNavigation from '@/hooks/useNavigation'
+
+export default function Form({ handleSearchPlaylist, playlistError }) {
+  const { value, onChange, reset, error, setError } = useInput()
+  const { navigateTo } = useNavigation()
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if (value) {
-      await handleSearchPlaylist(value)
-      reset()
-    }
+    if (!value || value === '') return
+
+    if (!validPlaylist(value)) return setError(true)
+
+    const playlistId = value.split('list=')[1]
+
+    navigateTo(`/${playlistId}`)
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <p className={styles.paragraph}>
         Enter the URL of a YouTube playlist to start the game. The playlist must
-        be public and have at most 50 videos.
+        be public and it will only use the first 50 videos.
       </p>
 
-      <div>
+      <div className={styles.inputContainer}>
         <input
           type="text"
           placeholder="Enter the playlist"
@@ -33,7 +38,7 @@ export default function Form({ handleSearchPlaylist, playlistError, video }) {
         <button>Start</button>
       </div>
 
-      {playlistError && <p className={styles.error}>Invalid playlist URL</p>}
+      {error && <p className={styles.error}>Invalid playlist URL</p>}
     </form>
   )
 }
