@@ -33,9 +33,7 @@ export default function usePlaylist() {
     }
   }, [playlistItems])
 
-  const handleSearchPlaylist = async (e, value) => {
-    e.preventDefault()
-
+  const handleSearchPlaylist = async value => {
     const playlistId = value.split('list=')[1]
 
     if (!playlistId) {
@@ -55,8 +53,8 @@ export default function usePlaylist() {
     setPlaylistItems(data.items)
   }
 
-  const restartGame = () => {
-    setSelectedVideo('')
+  const nextVideo = () => {
+    setSelectedOption('')
     if (playlistItems.length === 1) {
       setPlaylistItems([])
       return
@@ -74,6 +72,14 @@ export default function usePlaylist() {
     setSelectedOption(videoId)
   }
 
+  const restartGame = () => {
+    setPlaylistItems([])
+    setPlaylistError(false)
+    setOptions([])
+    setVideo('')
+    setSelectedOption('')
+  }
+
   return {
     playlistItems,
     playlistError,
@@ -81,7 +87,8 @@ export default function usePlaylist() {
     options,
     selectedOption,
     handleSearchPlaylist,
-    restartGame,
     selectOption,
+    nextVideo,
+    restartGame,
   }
 }

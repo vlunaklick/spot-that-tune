@@ -6,10 +6,12 @@ const inter = Inter({ subsets: ['latin'] })
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Component {...pageProps} />
       <style jsx global>{`
-        font-family: ${inter.style.fontFamily};
+        html {
+          font-family: ${inter.style.fontFamily};
+        }
       `}</style>
+      <Component {...pageProps} />
     </>
   )
 }
