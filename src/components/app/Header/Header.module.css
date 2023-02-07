@@ -6,19 +6,39 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .title {
+  --bg-size: 400%;
+  --color-one: #8b5cf6;
+  --color-two: #3b82f6;
+
   font-size: 2rem;
   font-weight: 700;
+  cursor: pointer;
 
-  background-image: linear-gradient(to right, #8b5cf6, #3b82f6);
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: scale 0.3s ease;
+
+  transition: scale 0.2s ease-in-out;
 }
 
-.title:hover {
-  cursor: pointer;
-  scale: 1.03;
+@media (prefers-reduced-motion: no-preference) {
+  .title {
+    animation: move-bg 8s linear infinite;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
 }
