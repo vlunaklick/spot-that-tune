@@ -12,7 +12,7 @@ export default function Header({ showChange }) {
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>
-        <Link href="/">Playlist Trivia</Link>
+        <Link href="/">Spot That Tune</Link>
       </h1>
       {showChange && <Button onClick={navigateToHome}>Change playlist</Button>}
     </header>

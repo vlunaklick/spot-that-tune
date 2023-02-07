@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Playlist Trivia</title>
+        <title>Spot That Tune | Selection</title>
       </Head>
       <Header showChange={false} />
       <main className={styles.main}>
