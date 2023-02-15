@@ -5,8 +5,8 @@ import useInput from '@/hooks/useInput'
 import { validPlaylist } from '@/utils'
 import useNavigation from '@/hooks/useNavigation'
 
-export default function Form({ handleSearchPlaylist, playlistError }) {
-  const { value, onChange, reset, error, setError } = useInput()
+export default function Form() {
+  const { value, onChange, error, setError } = useInput()
   const { navigateTo } = useNavigation()
 
   const handleSubmit = async e => {

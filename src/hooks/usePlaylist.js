@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export default function usePlaylist({ initialPlaylistItems }) {
   const [playlistItems, setPlaylistItems] = useState([])
@@ -51,9 +51,9 @@ export default function usePlaylist({ initialPlaylistItems }) {
     setPlaylistItems(removedVideo)
   }
 
-  const selectOption = videoId => {
+  const selectOption = useCallback(videoId => {
     setSelectedOption(videoId)
-  }
+  }, [])
 
   return {
     playlistItems,

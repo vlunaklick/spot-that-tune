@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+
+User-agent: *
+Allow: /
+
+Sitemap: https://spot-that-tune.vercel.app/sitemap.xml
